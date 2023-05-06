@@ -9,6 +9,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { AuthTabsComponent } from './components/auth/auth-tabs/auth-tabs.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { RegisterComponent } from './components/auth/register/register.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
