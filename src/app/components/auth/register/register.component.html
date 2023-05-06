@@ -1,0 +1,87 @@
+<div *ngIf="registrationFailed" class="registration-error-container">
+    <span class="error-msg" *ngIf="!emailAlreadyUsed">
+        There was an error registering your user
+    </span>
+    <span class="error-msg" *ngIf="emailAlreadyUsed">
+        Email was already registered
+    </span>
+    
+</div>
+
+<form [formGroup]="newUserForm" (ngSubmit)="onSubmit()" class="signin-form">
+
+    <div class="input-container" >       
+        <label for="firstName" class="signin-label">First name</label>
+        <input class="signin-input" type="text" name="firstName" id="firstName" formControlName="firstName" 
+            [class.error-container]="firstNameControl.invalid && (firstNameControl.touched || firstNameControl.dirty)">
+        <div *ngIf="firstNameControl.invalid && (firstNameControl.touched || firstNameControl.dirty)">
+            <span  class="error-msg" *ngIf="firstNameControl.hasError('required')">The first name is required</span>
+        </div>
+    </div>
+    <div class="input-container" >
+        <label for="lastName" class="signin-label">Last name</label>
+        <input class="signin-input" type="text" name="lastName" id="lastName" formControlName="lastName"
+            [class.error-container]="lastNameControl.invalid && (lastNameControl.touched || lastNameControl.dirty)">
+        <div *ngIf="lastNameControl.invalid && (lastNameControl.touched || lastNameControl.dirty)">
+            <span  class="error-msg" *ngIf="lastNameControl.hasError('required')">The last name is required</span>
+        </div>
+    </div>
+
+    <div class="input-container" >
+        <label for="email" class="signin-label">Email</label>
+        <input class="signin-input" type="text" name="email" id="email" formControlName="email"
+            [class.error-container]="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+        <div *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty)">
+            <span  class="error-msg" *ngIf="emailControl.hasError('required')">The email is required</span>
+            <span  class="error-msg" *ngIf="emailControl.hasError('email')">The email is not valid</span>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <label for="password" class="signin-label">Password</label>
+        <input class="signin-input" type="password" name="password" id="password" formControlName="password"
+            [class.error-container]="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)">
+        <div *ngIf="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)">
+            <span class="error-msg" *ngIf="passwordControl.hasError('required')">To confirm the password is required</span>
+        </div>
+        <div *ngIf="passwordControl.valid && newUserForm.invalid">
+            <span class="error-msg" *ngIf="newUserForm.hasError('matchingPasswordsValidator')">The passwords do not match</span>
+        </div>
+
+    </div>
+    <div class="input-container" >
+        <label for="confirmPassword" class="signin-label">Confirm password</label>
+        <input class="signin-input" type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" 
+            [class.error-container]="confirmPasswordControl.invalid && (confirmPasswordControl.touched || confirmPasswordControl.dirty)">
+        <div *ngIf="confirmPasswordControl.invalid && (confirmPasswordControl.touched || confirmPasswordControl.dirty)">
+            <span class="error-msg" *ngIf="confirmPasswordControl.hasError('required')">To confirm the password is required</span>
+        </div>
+        <div  *ngIf="confirmPasswordControl.valid && newUserForm.invalid">
+            <span  class="error-msg" *ngIf="newUserForm.hasError('matchingPasswordsValidator')">The passwords do not match</span>
+        </div>
+    </div>
+    <div class="select-container">
+        <label for="userRole" class="signin-label">Role</label>
+        <select class="signin-role-select" name="userRole" id="userRole" formControlName="role"
+            [class.error-container]="roleControl.invalid && (roleControl.touched || roleControl.dirty)">
+           
+                <option class="select-option" value="" >Choose a role</option>
+    
+                <option class="select-option" [ngValue]="role.role" *ngFor="let role of userRoles">{{role.roleName | titlecase}}
+                </option>
+         
+        </select>
+        <div *ngIf="roleControl.invalid && (roleControl.touched || roleControl.dirty)">
+            <span class="error-msg">To choose a role is required</span>
+        </div>
+    </div>
+    
+
+
+    <div class="btn-container">
+        <button class="register-btn" type="submit" [disabled]="newUserForm.invalid">
+            Register!
+        </button>
+    </div>
+
+</form>
