@@ -1,0 +1,8 @@
+<auth-tabs-component (selectedTab)="selectedTab($event)"></auth-tabs-component>
+<div *ngIf="tabSelected">
+    <register-component></register-component>
+</div>
+
+<div *ngIf="!tabSelected">
+    <login-component></login-component>
+</div>
