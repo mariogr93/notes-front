@@ -1,0 +1,12 @@
+<div class="tabs-container" id="tabs-container">
+  <div (click)="selectSignUpTab()" [class.active]="signUpSelected" class="tab" id="signup-tab">
+    Sign Up
+    <img src="../../../../assets/registration.svg" alt="icono de banca persona" id="signup-icon">
+
+  </div>
+  <div (click)="selectSignUpTab(false)" [class.active]="!signUpSelected" class="tab" id="login-tab">
+    Login
+    <img src="../../../../assets/login.svg" alt="icono de banca empresas" id="login-icon">
+  </div>
+  <div [style.left]="signUpSelected ? '0' : '50%'" class="line-marker"></div>
+</div>
