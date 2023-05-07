@@ -10,6 +10,8 @@ import { AuthTabsComponent } from './components/auth/auth-tabs/auth-tabs.compone
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SessionService } from './services/session.service';
+import { NotesComponent } from './components/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AuthenticationComponent,
     AuthTabsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
