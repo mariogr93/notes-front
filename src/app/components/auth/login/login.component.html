@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="input-container">
+        <label for="email" class="login-label">Email</label>
+        <input class="login-input" type="text" name="email" id="login-email" formControlName="email">
+        <span *ngIf="userNotFound">
+            User not found
+        </span>
+    </div>
+
+    <div class="input-container">
+        <label for="password" class="login-label">Password</label>
+        <input type="password" name="password" id="login-password" formControlName="password" class="login-input">
+    </div>
+
+
+    <div class="btn-container">
+        <button class="login-btn" type="submit" [disabled]="!loginForm.valid">
+            Login
+        </button>
+    </div>
+</form>
