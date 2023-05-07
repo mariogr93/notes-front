@@ -1,0 +1,14 @@
+.create-note-container {
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+    transition : all 500ms ease-out;
+    background-color: aliceblue;
+    height: 0;
+}
+
+.create-note-container-open {
+    height: 300px;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

@@ -17,10 +17,10 @@ export class RegisterComponent {
 
 
     userRoles = [
-        {id:1, roleName:"User", role:"ROLE_USER"},
-        {id:1, roleName:"Admin", role:"ROLE_ADMIN"}
+        {id:1, roleName:"User", role:"USER"},
+        {id:1, roleName:"Admin", role:"ADMIN"}
     ];
-    
+
     newUserForm = this.fb.group({
         firstName: [ '', Validators.required ],
         lastName: [ '', Validators.required ],
