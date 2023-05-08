@@ -1,0 +1,10 @@
+<div class="input-container" >
+        
+    <label for="firstName" class="signin-label">First name</label>
+    <input class="signin-input" type="text" name="firstName" id="firstName" formControlName="firstName" 
+        [class.error-container]="firstNameControl.invalid && (firstNameControl.touched || firstNameControl.dirty)">
+    <div *ngIf="firstNameControl.invalid && (firstNameControl.touched || firstNameControl.dirty)">
+
+        <span  class="error-msg" *ngIf="firstNameControl.hasError('required')">The first name is required</span>
+    </div>
+</div>
