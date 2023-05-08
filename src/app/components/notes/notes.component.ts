@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Note } from "src/app/models/note.model";
+import { ModalService } from "src/app/services/modal-msg.service";
 import { NoteService } from "src/app/services/notes.service";
 import { SessionService } from "src/app/services/session.service";
 
@@ -15,7 +16,7 @@ export class NotesComponent implements OnInit{
 
     isCreateNoteOpen: boolean = false;
 
-    constructor(private noteService: NoteService, private sessionService: SessionService ){} //, private modal: ModalService
+    constructor(private noteService: NoteService, private sessionService: SessionService, private modal: ModalService){}
 
     ngOnInit(): void {
         if(this.sessionService.token){
@@ -27,7 +28,18 @@ export class NotesComponent implements OnInit{
         this.noteList.push(newNote)    
 
     }
-    
+
+    deleteNote(note: any) {
+
+        this.modal.openModal()
+        this.modal.actionButton(() => this.noteService.deleteNote(note).subscribe(res => 
+
+            this.noteList = this.noteList.filter(n => n.id !== note.id)
+        ))
+
+        
+    }
+
     openCreateNote(): void {
         this.isCreateNoteOpen = true;
     }

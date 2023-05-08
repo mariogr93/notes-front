@@ -14,6 +14,9 @@ import { SessionService } from './services/session.service';
 import { NotesComponent } from './components/notes/notes.component';
 import { CreateNoteComponent } from './components/notes/create-note/create-note.component';
 import { NoteService } from './services/notes.service';
+import { ListNoteComponent } from './components/notes/list-note/list-note.component';
+import { ModalService } from './services/modal-msg.service';
+import { ModalComponent } from './components/shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { NoteService } from './services/notes.service';
     LoginComponent,
     RegisterComponent,
     NotesComponent,
-    CreateNoteComponent
+    CreateNoteComponent,
+    ListNoteComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,7 @@ import { NoteService } from './services/notes.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthenticationService, SessionService, NoteService],
+  providers: [AuthenticationService, SessionService, NoteService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
