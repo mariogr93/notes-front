@@ -1,8 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, ValidationErrors, Validators } from "@angular/forms";
-import { catchError, throwError } from "rxjs";
+import { Subscription, catchError, throwError, timer } from "rxjs";
 import { UserRegistration } from "src/app/models/user.model";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { ModalService } from "src/app/services/modal-msg.service";
+import { unsubscribeMany } from "src/utils/subscription-management";
 
 
 @Component({
@@ -11,10 +13,11 @@ import { AuthenticationService } from "src/app/services/authentication.service";
     styleUrls:["./register.component.css"]
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy{
     registrationFailed: boolean = false;
     emailAlreadyUsed: boolean = false;
 
+    subs: Subscription[] = [];
 
     userRoles = [
         {id:1, roleName:"User", role:"USER"},
@@ -55,7 +58,11 @@ export class RegisterComponent {
         return this.newUserForm.get("role") as FormControl;
     }
 
-    constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
+    constructor(private fb: FormBuilder, private authService: AuthenticationService, private modal: ModalService) { }
+
+    ngOnDestroy(): void {
+        unsubscribeMany(this.subs);
+    }
 
     onSubmit(): void {
 
@@ -74,6 +81,7 @@ export class RegisterComponent {
                     this.passwordControl.markAsTouched();
                     this.confirmPasswordControl.setValue('');
                     this.confirmPasswordControl.markAsTouched();
+                    this.openSimpleModalDanger()
                     
 
                     return throwError(() => err)
@@ -81,6 +89,7 @@ export class RegisterComponent {
                     this.newUserForm.reset();
                     this.registrationFailed = false;
                     this.emailAlreadyUsed = false;
+                    this.openSimpleModalSuccess()
                 });
         }
     }
@@ -103,5 +112,15 @@ export class RegisterComponent {
             role: this.newUserForm.get("role")?.value
         }
         return signupForm;
+    }
+
+    openSimpleModalSuccess(){
+        this.modal.openSimpleModal({title: "Reistered!", message:"User was registered successfully.", isSuccess: true})
+        this.subs.push(timer(1500).subscribe(() => this.modal.closeSimpleModal()));
+    }
+
+    openSimpleModalDanger(){
+        this.modal.openSimpleModal({title: "Ooops!", message:"Something went wrong with the registration.", isSuccess: false})
+        this.subs.push(timer(1500).subscribe(() => this.modal.closeSimpleModal()));
     }
 }
