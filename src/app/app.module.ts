@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,9 @@ import { NoteService } from './services/notes.service';
 import { ListNoteComponent } from './components/notes/list-note/list-note.component';
 import { ModalService } from './services/modal-msg.service';
 import { ModalComponent } from './components/shared/modal/modal.component';
+import { AuthGuard } from './services/connection/auth-guard.service';
+import { CustomInterceptor } from './services/connection/http.interceptor';
+import { SimpleModalComponent } from './components/shared/simple-modal/simple-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { ModalComponent } from './components/shared/modal/modal.component';
     NotesComponent,
     CreateNoteComponent,
     ListNoteComponent,
-    ModalComponent
+    ModalComponent,
+    SimpleModalComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { ModalComponent } from './components/shared/modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthenticationService, SessionService, NoteService, ModalService],
+  providers: [AuthenticationService, SessionService, NoteService, ModalService, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
