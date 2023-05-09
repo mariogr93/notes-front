@@ -1,14 +1,56 @@
 .create-note-container {
-    visibility: hidden;
-    opacity: 0;
-    width: 100%;
-    transition : all 500ms ease-out;
-    background-color: aliceblue;
-    height: 0;
+  visibility: hidden;
+  opacity: 0;
+  width: 100%;
+  transition: all 500ms ease-out;
+  background-color: aliceblue;
+  height: 0;
 }
 
 .create-note-container-open {
-    height: 300px;
-    visibility: visible !important;
-    opacity: 1 !important;
+  height: 300px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.new-note-btn-container {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  width: 100%;
+}
+
+.new-note-btn {
+  color: rgb(80, 225, 133);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #50e185;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 140px;
+  padding: 10px 0;
+  transition: 0.4s;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.new-note-btn img {
+  height: 25px;
+  width: 25px;
+  margin-right: 2px;
+  filter: invert(99%) sepia(70%) saturate(1724%) hue-rotate(64deg) brightness(98%) contrast(80%);
+}
+
+.new-note-btn:hover {
+  color: white;
+  background-color: rgb(80, 225, 133);
+}
+
+.new-note-btn:hover img {
+  filter: invert(99%) sepia(4%) saturate(2%) hue-rotate(137deg) brightness(119%)
+    contrast(100%);
 }

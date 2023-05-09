@@ -1,6 +1,9 @@
 
-<div>
-    <button (click)="openCreateNote()">Add new note</button>
+<div class="new-note-btn-container">
+    <button class="new-note-btn" (click)="openCreateNote()">
+        <img  src="../../../assets/add-circle.svg" alt="close">
+        Add new note
+    </button>
 </div>
 
 <div  class="create-note-container" [class.create-note-container-open]="isCreateNoteOpen">
