@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Route, Router } from "@angular/router";
-import { catchError, throwError } from "rxjs";
+import { Subscription, catchError, throwError, timer } from "rxjs";
 import { AuthenticationService } from "src/app/services/authentication.service";
+import { ModalService } from "src/app/services/modal-msg.service";
 import { SessionService } from "src/app/services/session.service";
+import { unsubscribeMany } from "src/utils/subscription-management";
 
 @Component({
     selector: "login-component",
@@ -11,9 +13,11 @@ import { SessionService } from "src/app/services/session.service";
     styleUrls:["./login.component.css"]
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnDestroy{
 
   userNotFound = false;
+  subs: Subscription[] = [];
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
@@ -23,8 +27,13 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private modal: ModalService
   ) {}
+
+  ngOnDestroy(): void {
+    unsubscribeMany(this.subs);
+}
 
   onSubmit(): void{
     if (this.loginForm.valid) {
@@ -34,7 +43,7 @@ export class LoginComponent {
             if(err.error.statusCode == 404){
               this.userNotFound = true;
             }
-            console.log("catchError",err)
+            this.openSimpleModalDanger()
             return throwError(()=> err) 
         })
       )
@@ -47,4 +56,10 @@ export class LoginComponent {
       });
     }
   }
+
+  openSimpleModalDanger(){
+    this.modal.openSimpleModal({title: "Ooops!", message:"Something went wrong, please check your credentials.", isSuccess: false})
+    this.subs.push(timer(1500).subscribe(() => this.modal.closeSimpleModal()));
+
+}
 }
