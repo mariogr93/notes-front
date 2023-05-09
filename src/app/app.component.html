@@ -1,3 +1,7 @@
 <div id="app-container">
     <router-outlet></router-outlet>
 </div>
+
+<simple-modal-component *ngIf="showSimpleModal"></simple-modal-component>
+
+<modal-component *ngIf="showModal"></modal-component>

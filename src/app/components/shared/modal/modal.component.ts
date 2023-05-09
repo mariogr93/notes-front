@@ -10,11 +10,9 @@ import { ModalService } from "src/app/services/modal-msg.service";
 
 export class ModalComponent {
 
-
     constructor(private modal: ModalService) { }
 
     cancelButton() {
-        console.log("ModalComponent")
         this.modal.closeModal()
     }
 

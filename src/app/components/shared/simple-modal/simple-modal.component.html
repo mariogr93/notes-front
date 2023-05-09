@@ -1,0 +1,13 @@
+<div class="modal-container" *ngIf="modalData">
+    <div class="modal-content">
+        <div class=" icon-top" [ngClass]="modalData.isSuccess ? 'succes succes-animation' : 'danger danger-animation'">
+            <img *ngIf="modalData.isSuccess" src="../../../../assets/check-done.svg" alt="check-don">
+            <img *ngIf="!modalData.isSuccess" src="../../../../assets/close.svg" alt="close">
+        </div>
+        <div class="modal-body">
+            <p class="title">{{modalData.title}}</p>
+            <p class="message">{{modalData.message}}</p>
+        </div>
+        <div class=" modal-footer"  [ngClass]="modalData.isSuccess ? 'succes' : 'danger'"></div>
+    </div>
+</div>
