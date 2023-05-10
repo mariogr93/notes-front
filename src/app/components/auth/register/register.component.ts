@@ -69,7 +69,7 @@ export class RegisterComponent implements OnDestroy{
         if (this.newUserForm.valid) {
            const newUser: UserRegistration = this.getFrom()
 
-            this.authService.registerUser(newUser).pipe(
+           this.subs.push(this.authService.registerUser(newUser).pipe(
                 catchError(err => {
                     if(err.status == 409) {
                         this.emailAlreadyUsed = true
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnDestroy{
                     this.registrationFailed = false;
                     this.emailAlreadyUsed = false;
                     this.openSimpleModalSuccess()
-                });
+                }));
         }
     }
 

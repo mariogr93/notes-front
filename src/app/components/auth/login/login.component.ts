@@ -37,7 +37,7 @@ export class LoginComponent implements OnDestroy{
 
   onSubmit(): void{
     if (this.loginForm.valid) {
-      this.authService.loginUser(this.loginForm.value)
+      this.subs.push(this.authService.loginUser(this.loginForm.value)
       .pipe(
         catchError(err => {
             if(err.error.statusCode == 404){
@@ -53,7 +53,7 @@ export class LoginComponent implements OnDestroy{
         this.userNotFound = false;
         this.loginForm.reset();
         this.router.navigate(['/auth/notes']);
-      });
+      }));
     }
   }
 
