@@ -1,16 +1,18 @@
+<div class="note-list">
+    <div class="note-list-container" *ngFor="let note of noteList">
+        <div class="btn-container">
 
-<div class="note-list-container" *ngFor="let note of noteList">
-    <div class="btn-container">
+            <button class="completed-btn" (click)="checkNote(note)"><img *ngIf="note.completed"
+                    src="../../../../assets/check-done.svg" alt=""></button>
+        </div>
+        <div class="note-container">
 
-        <button class="completed-btn" (click)="checkNote(note)"><img *ngIf="note.completed" src="../../../../assets/check-done.svg" alt=""></button>
-    </div>
-    <div class="note-container" >
+            <h4>{{note.title}}</h4>
+            <p>{{note.description}}</p>
+        </div>
 
-        <h4>{{note.title}}</h4>
-        <p>{{note.description}}</p>
-    </div>
-
-    <div class="btn-container">
-        <button (click)="deleteNote(note)" class="delete-btn"><img src="../../../../assets/delete.svg" ></button>
+        <div class="btn-container">
+            <button (click)="deleteNote(note)" class="delete-btn"><img src="../../../../assets/delete.svg"></button>
+        </div>
     </div>
 </div>
