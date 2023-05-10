@@ -8,7 +8,8 @@ import { CustomResponse } from "../models/custom-response.interface";
 @Injectable()
 
 export class AuthenticationService {
-    private readonly apiUrl = 'http://localhost:8080/api/v1/auth';
+    //private readonly apiUrl = 'http://localhost:8080/api/v1/auth';
+    private readonly apiUrl ='https://notes-api-production-2963.up.railway.app/api/v1/auth'
 
     constructor(private http: HttpClient){}
 
