@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Subscription, catchError, throwError, timer } from "rxjs";
+import { Subscription, catchError, switchMap, throwError, timer } from "rxjs";
 import { Note, NoteCreate } from "src/app/models/note.model";
 import { ModalService } from "src/app/services/modal-msg.service";
 import { NoteService } from "src/app/services/notes.service";
@@ -38,8 +38,8 @@ export class CreateNoteComponent {
         }
 
     checkNote() {
-        const completed = this.newNoteForm.get("completed") 
-        completed?.setValue(!completed.value) //= !this.newNoteForm.get("completed")?.value
+        const completed = this.newNoteForm.get("completed");
+        completed?.setValue(!completed.value); //= !this.newNoteForm.get("completed")?.value
         
     }
 
@@ -49,13 +49,13 @@ export class CreateNoteComponent {
             
             this.noteService.createNote(newNote).pipe(
                 catchError(err => {
-                    console.log("catchError", err)
-                    this.openSimpleModalDanger()
-                    return throwError(()=> err)
+                    console.log("catchError", err);
+                    this.openSimpleModalDanger();
+                    return throwError(()=> err);
                 })
             ).subscribe(res => {
                 this.newNoteEmitter.emit(res.data.note);
-                this.newNoteForm.reset()
+                this.newNoteForm.reset();
                 this.newNoteForm.get('completed')?.setValue(false);
                 this.openSimpleModalSuccess();
                         
@@ -64,12 +64,15 @@ export class CreateNoteComponent {
     }
 
     closeCreateNote():void {
-        this.closeCreateNoteEmitter.emit()
+        this.closeCreateNoteEmitter.emit();
     }
 
     openSimpleModalSuccess(){
         this.modal.openSimpleModal({title: "Saved!", message:"Note was added successfully.", isSuccess: true})
-        this.subs.push(timer(1500).subscribe(() => this.modal.closeSimpleModal()));
+        this.subs.push(timer(1500).subscribe(() => {
+            this.closeCreateNote();
+            this.modal.closeSimpleModal();
+        }));
 
     }
 

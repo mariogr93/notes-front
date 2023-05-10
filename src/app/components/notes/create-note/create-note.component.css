@@ -1,68 +1,73 @@
-
 .create-note {
-    display: flex;
-    flex-direction: column;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: center;
+}
+
+.header h4 {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #999;
 }
 
 .btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
 }
 
 .form-create-note {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.input-container{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.input-label{
-    font-weight: 400;
-    pointer-events: auto;
-    user-select: none;
-    margin-left: 1px; 
-    font-family:  Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    color: #999;
-    line-height: 1.2;
-    padding-left: 2px;
+.input-label {
+  font-weight: 400;
+  pointer-events: auto;
+  user-select: none;
+  margin-left: 1px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #999;
+  line-height: 1.2;
+  padding-left: 2px;
 }
 
 .input-text {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    background-color: rgb(255, 255, 255);
-    border-bottom: 2px solid #dbdbdb;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    margin-bottom: 2px;
-    -webkit-transition : border 400ms ease-out;
-    -moz-transition : border 400ms ease-out;
-    -o-transition : border 400ms ease-out;
-    transition : border 400ms ease-out;
-    cursor: text; 
-    width: 100%;
-    height: 25px;
-    font-size: 18px;
-    color: #555;
-    line-height: 1.2;
-    padding: 0 2px;
-    outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 2px solid #dbdbdb;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 2px;
+  -webkit-transition: border 400ms ease-out;
+  -moz-transition: border 400ms ease-out;
+  -o-transition: border 400ms ease-out;
+  transition: border 400ms ease-out;
+  cursor: text;
+  width: 100%;
+  height: 25px;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.2;
+  padding: 0 2px;
+  outline: none;
 }
 
 input:-webkit-autofill,
@@ -71,15 +76,70 @@ input:-webkit-autofill:focus {
 }
 
 .btn {
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .btn img {
-    height: 25px;
-    width: 25px;
+  height: 25px;
+  width: 25px;
+}
+
+.form-create-note-btns {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.cancel-btn {
+  height: 35px;
+  width: 100px;
+  color: white;
+  background-color: rgb(164, 164, 164);
+  border: 1px solid rgb(164, 164, 164);
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 15px;
+  margin: 10px;
+  /* padding: 10px 0; */
+  box-shadow: 0 0 20px rgb(104 85 224 / 35%);
+  transition: 0.4s;
+}
+
+.cancel-btn:hover {
+  box-shadow: 0 0 20px rgb(164, 164, 164);
+}
+
+.submit-btn {
+  height: 35px;
+  width: 100px;
+  color: white;
+  background-color: rgb(80, 225, 133);
+  border: 1px solid rgb(80, 225, 133);
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 10px;
+  /* padding: 10px 0; */
+  transition: 0.4s;
+}
+
+.submit-btn:hover {
+  color: white;
+  box-shadow: 0 0 20px rgb(80, 225, 133);
+  background-color: rgb(80, 225, 133);
+}
+
+.submit-btn:disabled,
+.submit-btn[disabled=disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  box-shadow: none;
 }

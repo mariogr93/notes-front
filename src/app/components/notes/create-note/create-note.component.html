@@ -1,9 +1,12 @@
 <div class="create-note">
     <div class="header">
         <h4>Create new note</h4>
-        <button (click)="closeCreateNote()">X</button>
     </div>
     <Form [formGroup]="newNoteForm" (ngSubmit)="onSubmit()" class="form-create-note">
+        <!-- <div class="input-container">
+            <label for="password" class="login-label">Password</label>
+            <input type="password" name="password" id="login-password" formControlName="password" class="login-input">
+        </div> -->
         <div class="input-container" >
             <label for="new-note-title" class="input-label">Title</label>
             <input class="input-text" type="text" name="new-note-title" id="new-note-title" formControlName="title">
@@ -18,10 +21,10 @@
                 <img *ngIf="newNoteForm.controls['completed'].value" src="../../../../assets/check-done.svg" alt="">
             </button>
         </div> -->
-        <div>
-            <button type="button" (click)="closeCreateNote()">Cancel</button>
+        <div class="form-create-note-btns">
+            <button class="cancel-btn" type="button" (click)="closeCreateNote()">Cancel</button>
 
-            <button type="submit" [disabled]="!newNoteForm.valid">Create!</button>
+            <button class="submit-btn" type="submit" [disabled]="!newNoteForm.valid">Create!</button>
         </div>
-    </Form>
+    </Form >
 </div>
