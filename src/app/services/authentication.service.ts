@@ -3,22 +3,23 @@ import { Injectable } from "@angular/core";
 import { UserLogin, UserRegistration } from "../models/user.model";
 import { Observable } from "rxjs";
 import { CustomResponse } from "../models/custom-response.interface";
+import { environment } from "src/environments/environment";
 
 
 @Injectable()
 
 export class AuthenticationService {
-    //private readonly apiUrl = 'http://localhost:8080/api/v1/auth';
-    private readonly apiUrl ='https://notes-api-production-2963.up.railway.app/api/v1/auth'
+    private readonly domain = environment.DOMAIN;
+    private readonly endpoint = '/api/v1/auth'
 
     constructor(private http: HttpClient){}
 
 
     registerUser(user: UserRegistration): Observable<any>{
-        return this.http.post<CustomResponse>(`${this.apiUrl}/register`, user);
+        return this.http.post<CustomResponse>(`${this.domain}${this.endpoint}/register`, user);
     }
 
     loginUser(user: UserLogin): Observable<any> {
-        return this.http.post<CustomResponse>(`${this.apiUrl}/login`, user);
+        return this.http.post<CustomResponse>(`${this.domain}${this.endpoint}/login`, user);
     }
 }
